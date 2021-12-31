@@ -59,12 +59,12 @@ bullet_state = "ready"
 
 # Score Text
 score_value = 0
-score_font = pygame.font.Font('fonts/ARCADESCORE.TTF', 32)
+score_font = pygame.font.Font('fonts/arcade.TTF', 32)
 scoreX = 10
 scoreY = 10
 
 # Game Over
-game_over_font = pygame.font.Font('fonts/ARCADESCORE.TTF', 80)
+game_over_font = pygame.font.Font('fonts/arcade.TTF', 80)
 g_overX = 50
 g_overY = 250
 death_range = 440
