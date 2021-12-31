@@ -35,6 +35,7 @@ enemyY = []
 enemyX_change = []
 enemyY_change = []
 num_of_enemies = 8
+speed_increase = 0
 
 for i in range(num_of_enemies):
     enemyX.append(random.randint(0, 735))
@@ -160,10 +161,10 @@ while running:
 
         enemyX[i] += enemyX_change[i]
         if enemyX[i] <= 0:
-            enemyX_change[i] = 5
+            enemyX_change[i] = 4 + speed_increase
             enemyY[i] += enemyY_change[i]
         elif enemyX[i] >= 736:
-            enemyX_change[i] = -5
+            enemyX_change[i] = -4 - speed_increase
             enemyY[i] += enemyY_change[i]
         # Collision
         collision = isCollision(enemyX[i], enemyY[i], bulletX, bulletY)
@@ -172,9 +173,12 @@ while running:
             explosion_sound.play()
             bulletY = 480
             bullet_state = "ready"
-            score_value += 1
             enemyX[i] = random.randint(0, 735)
             enemyY[i] = random.randint(50, 150)
+            score_value += 1
+            # Increases speed value by 1 for every 10 score (adds it to enemy speed)
+            if score_value % 10 == 0:
+                speed_increase += 1
 
         enemy(enemyX[i], enemyY[i], i)
 
