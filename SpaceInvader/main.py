@@ -34,10 +34,11 @@ enemyX = []
 enemyY = []
 enemyX_change = []
 enemyY_change = []
-num_of_enemies = 8
+num_of_enemies = 5
+max_num_of_enemies = 14
 speed_increase = 0
 
-for i in range(num_of_enemies):
+for i in range(max_num_of_enemies):
     enemyX.append(random.randint(0, 735))
     enemyY.append(random.randint(50, 150))
     enemyX_change.append(5)
@@ -107,6 +108,7 @@ def game_over_text(x, y):
 
 FPS = 60
 clock = pygame.time.Clock()
+
 # GAME LOOP
 running = True
 while running:
@@ -177,8 +179,10 @@ while running:
             enemyY[i] = random.randint(50, 150)
             score_value += 1
             # Increases speed value by 1 for every 10 score (adds it to enemy speed)
+            if score_value % 15 == 0 and num_of_enemies <= max_num_of_enemies:
+                num_of_enemies += 1
             if score_value % 10 == 0:
-                speed_increase += 1
+                speed_increase += 0.8
 
         enemy(enemyX[i], enemyY[i], i)
 

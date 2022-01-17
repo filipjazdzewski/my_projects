@@ -1,23 +1,24 @@
 data_base = [
-    {'id': 1, 'imię': 'Jan', 'Nazwisko': 'Kowalski',
-     'konto 1': {'id': 1, 'nazwa banku': 'PKO', 'suma środków': 2200},
-     'konto 2': {'id': 2, 'nazwa banku': 'NBP', 'suma środków': 1300}},
-    {'id': 2, 'imię': 'Mirosław', 'Nazwisko': 'Debko',
-     'konto 1': {'id': 3, 'nazwa banku': 'NBP', 'suma środków': 420},
-     'konto 2': {'id': 1, 'nazwa banku': 'ING', 'suma środków': 12200}, },
-    {'id': 3, 'imię': 'Filip', 'Nazwisko': 'Jażdżewski',
-     'konto 1': {'id': 1, 'nazwa banku': 'PKO', 'suma środków': 10000}},
-    {'id': 4, 'imię': 'Agata', 'Nazwisko': 'Paczkowska',
-     'konto 1': {'id': 1, 'nazwa banku': 'NBP', 'suma środków': 7700},
-     'konto 2': {'id': 2, 'nazwa banku': 'PKO', 'suma środków': 4111}
-     }
+    {'id': 1, 'imie': 'Jan', 'nazwisko': 'Kowalski', 'konto1': {'id': 1, 'bank': 'NBP', 'srodki': 1800}},
+
+    {'id': 2, 'imie': 'Filip', 'nazwisko': 'Meger', 'konto1': {'id': 1, 'bank': 'PKO', 'srodki': 13300},
+     'konto2': {'id': 2, 'bank': 'PKK', 'srodki': 3850}},
+
+    {'id': 3, 'imie': 'Daria', 'nazwisko': 'Gajdamowicz', 'konto1': {'id': 1, 'bank': 'PKO', 'srodki': 420}},
+
+    {'id': 4, 'imie': 'Kuba', 'nazwisko': 'Paszke', 'konto1': {'id': 1, 'bank': 'PKK', 'srodki': 420},
+     'konto2': {'id': 2, 'bank': 'NBP', 'srodki': 120}, 'konto3': {'id': 3, 'bank': 'PKO', 'srodki': 4990}}
 ]
 
+searched_bank = 'PKO'
+money_sum = 0
 
-def sum_of_funds(data, bank):
-    my_sum = 0
-    for person in data_base:
-        print(person)
+for person in data_base:
+    count = 0
+    for id_name in person:
+        if count > 2:
+            if person[id_name]['bank'] == searched_bank:
+                money_sum += person[id_name]['srodki']
+        count += 1
 
-
-
+print(money_sum)
