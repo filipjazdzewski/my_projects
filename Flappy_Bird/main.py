@@ -141,7 +141,6 @@ while True:
                 pygame.quit()
                 sys.exit()
         if event.type == PLAYER_ANIMATION:
-            print(player_index)
             PLAYER_IMG = player_frames[player_index]
             player_index += wing_change
             if player_index > 2:
