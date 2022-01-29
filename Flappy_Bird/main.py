@@ -32,10 +32,12 @@ def collision():
     for pipe_rect in pipe_list:
         if player_rect.colliderect(pipe_rect):
             HIT_SOUND.play()
+            SWOOSH_SOUND.play()
             DEATH_SOUND.play()
             return False
     if player_rect.bottom >= ground_y:
         HIT_SOUND.play()
+        SWOOSH_SOUND.play()
         DEATH_SOUND.play()
         return False
     return True
@@ -90,12 +92,14 @@ pygame.display.set_icon(icon)
 JUMP_SOUND = pygame.mixer.Sound('sound/sfx_wing.wav')
 HIT_SOUND = pygame.mixer.Sound('sound/sfx_hit.wav')
 DEATH_SOUND = pygame.mixer.Sound('sound/sfx_die.wav')
+SWOOSH_SOUND = pygame.mixer.Sound('sound/sfx_swooshing.wav')
 SCORE_SOUND = pygame.mixer.Sound('sound/sfx_point.wav')
 
 JUMP_SOUND.set_volume(sound_volume)
 HIT_SOUND.set_volume(sound_volume)
 DEATH_SOUND.set_volume(sound_volume)
 SCORE_SOUND.set_volume(sound_volume)
+SWOOSH_SOUND.set_volume(sound_volume)
 
 '''  LOADING IMAGES  '''
 BG_IMG = pygame.transform.scale2x(pygame.image.load('assets/background-day.png').convert())
@@ -115,13 +119,14 @@ PLAYER_DOWN_FLAP = pygame.transform.rotozoom(pygame.image.load('assets/yellowbir
 
 player_frames = [PLAYER_UP_FLAP, PLAYER_MID_FLAP, PLAYER_DOWN_FLAP]
 player_index = 0
+wing_change = 1
 PLAYER_IMG = player_frames[player_index]
 player_rect = PLAYER_IMG.get_rect(center=(150, 430))
 
 gravity = 0.3
 player_movement = player_fall = 0
 PLAYER_ANIMATION = pygame.USEREVENT + 2
-pygame.time.set_timer(PLAYER_ANIMATION, 150)
+pygame.time.set_timer(PLAYER_ANIMATION, 100)
 
 while True:
     screen.fill((0, 0, 0))
@@ -136,10 +141,15 @@ while True:
                 pygame.quit()
                 sys.exit()
         if event.type == PLAYER_ANIMATION:
+            print(player_index)
             PLAYER_IMG = player_frames[player_index]
-            player_index += 1
+            player_index += wing_change
             if player_index > 2:
-                player_index = 0
+                player_index -= 2
+                wing_change = -1
+            if player_index < 0:
+                player_index += 2
+                wing_change = 1
         if game_active:
             if event.type == SPAWN_PIPE:
                 pipe_list.extend(create_pipe())
