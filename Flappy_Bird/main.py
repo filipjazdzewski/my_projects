@@ -70,12 +70,13 @@ def display_highest_score(high_score):
 '''  SETUP  '''
 pygame.init()
 clock = pygame.time.Clock()
+score_read = open('score.txt', 'r')
 FPS = 120
 sound_volume = 0.5
 game_active = False
 scroll = 2
 score = 0
-highest_score = 0
+highest_score = int(score_read.read())
 font = pygame.font.Font('fonts/04B_19.ttf', 64)
 
 '''  WINDOW  '''
@@ -129,10 +130,14 @@ while True:
 
     for event in pygame.event.get():
         if event.type == QUIT:
+            score_write = open('score.txt', 'w')
+            score_write.write(str(highest_score))
             pygame.quit()
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
+                score_write = open('score.txt', 'w')
+                score_write.write(str(highest_score))
                 pygame.quit()
                 sys.exit()
         if event.type == PLAYER_ANIMATION:
