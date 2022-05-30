@@ -1,0 +1,51 @@
+yarn init
+// Wprowadź nazwę projektu, a resztę opcji zatwierdź klawiszem enter
+
+yarn add eslint --dev
+
+yarn run eslint --init 
+{
+W konsoli pojawi się parę opcji do ustawienia. Wybierz kolejno:
+How would you like to use ESLint? · problems
+What type of modules does your project use? · commonjs
+Which framework does your project use? · none
+Does your project use TypeScript? · No
+Where does your code run? · browser
+What format do you want your config file to be in? · JSON   
+}
+
+yarn add --dev nodemon
+
+???
+npx nodemon src/index.js // nie wiem czy to potrzebne
+
+Następnie uruchom w główny folderze polecenie: yarn start
+
+"scripts": {
+    "start": "node src/index.js"
+} (do package.json)
+???
+
+yarn add --dev @babel/core @babel/cli @babel/preset-env @babel/node
+
+Tworzymy plik .babelrc, a w nim:
+{
+  "presets": ["@babel/preset-env"]
+}
+
+"scripts": {
+  "start": "nodemon src/index.js",
+  "babel": "babel src -d es5out"
+}
+
+yarn babel
+
+yarn add lodash
+
+.gitignore
+
+.idea/ # Jeśli korzystasz z IntelliJ
+node_modules/
+es5out/
+log/
+.yarn/
