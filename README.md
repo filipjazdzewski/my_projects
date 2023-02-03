@@ -1,2 +1,1 @@
-# my_projects
-Moje personalne projekty - np. gry
+# Small projects made in Python - pygame
